@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { adminController } from "../controllers/admin.controller";
+import { seedersRoutes } from "./seeders.routes";
 
 export const adminRoutes = Router();
 
-adminRoutes.get('/seeders/users', adminController.generateUsers);
+adminRoutes.use('/seeders', seedersRoutes);

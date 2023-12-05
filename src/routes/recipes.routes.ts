@@ -4,4 +4,5 @@ import { recipesController } from "../controllers/recipes.controller";
 export const recipesRoutes = Router();
 
 recipesRoutes.get('/', recipesController.fetchRecipes);
+recipesRoutes.get('/search', recipesController.searchRecipes);
 recipesRoutes.get('/random', recipesController.getRandomRecipes);
