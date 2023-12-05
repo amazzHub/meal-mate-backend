@@ -1,11 +1,11 @@
 import { faker } from "@faker-js/faker";
-import { UserSchema } from "../database/schemas/user.schema";
+import { CreatorSchema } from "../database/schemas/creator.schema";
 
-const generateRandomUsers = (numUsers: number) => {
-    const users = [];
+const generateRandomCreators = (numCreators: number) => {
+    const creators = [];
 
-    for (let i = 0; i < numUsers; i++) {
-        users.push(
+    for (let i = 0; i < numCreators; i++) {
+        creators.push(
             {
                 firstName: faker.person.firstName(),
                 lastName: faker.person.lastName(),
@@ -20,19 +20,23 @@ const generateRandomUsers = (numUsers: number) => {
             }
         );
     }
-    return users;
+    return creators;
 };
 
-export const seedUsers = async (userCount: number) => {
+export const generateCreators = async (creatorCount: number) => {
     try {
-        await UserSchema.deleteMany({});
-        console.log("Existing users cleared");
+        await CreatorSchema.deleteMany({});
+        console.log("Existing creators cleared");
 
-        const randomUsers = generateRandomUsers(userCount);
+        const randomCreators = generateRandomCreators(creatorCount);
 
-        await UserSchema.insertMany(randomUsers);
-        console.log("User data seeded successfully");
+        await CreatorSchema.insertMany(randomCreators);
+        console.log("Creator data seeded successfully");
     } catch (error) {
         throw error;
     }
 };
+
+export const creatorSeeder = {
+    generateCreators,
+}

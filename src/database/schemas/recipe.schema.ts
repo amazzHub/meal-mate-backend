@@ -1,6 +1,22 @@
-import { Schema } from 'mongoose';
+import { Schema, model } from 'mongoose';
 
-export const recipesSchema: Schema = new Schema(
+export type Ingredient = {
+    name: string;
+    grams: number;
+}
+export type IRecipe = {
+    _id?: string;
+    name: string;
+    ingredients: Ingredient;
+    rating: number;
+    creatorEmail: string;
+    title: string;
+    preparationTime: number;
+    createdAt?: string;
+    updatedAt?: string;
+}
+
+export const Recipe: Schema = new Schema(
     {
         name: {
             type: String,
@@ -11,9 +27,9 @@ export const recipesSchema: Schema = new Schema(
             required: true,
         },
         ratings: {
-            type: String
+            type: Number
         },
-        ownerEmail: {
+        creatorEmail: {
             type: String,
             required: true,
         },
@@ -23,7 +39,8 @@ export const recipesSchema: Schema = new Schema(
         preparationTime: {
             type: Number,
         },
-        recipes: Array,
     },
     { timestamps: true }
 );
+
+export const RecipeSchema = model('recipe', Recipe);

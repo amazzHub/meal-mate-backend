@@ -5,6 +5,7 @@ export const spoonacularApi = axios.create({ baseURL: process.env.SPOONACULAR_BA
 spoonacularApi.interceptors.request.use(
     async (config: any) => {
         config.headers.Accept = 'application/json';
+        config.headers['Content-Type'] = 'application/json';
         const apiKey = process.env.SPOONACULAR_API_KEY;
         config.url += `${config.url.includes('?') ? '&' : '?'}apiKey=${apiKey}`;
         return config;

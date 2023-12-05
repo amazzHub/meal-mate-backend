@@ -1,6 +1,22 @@
-import { Schema, model } from 'mongoose';
+import mongoose, { Schema, model } from 'mongoose';
 
-export const User: Schema = new Schema(
+export type ICreator = {
+    _id?: mongoose.Types.ObjectId;
+    email: string;
+    firstName: string;
+    lastName: string;
+    location: string;
+    avatar: string;
+    about: string;
+    isVerified: boolean;
+    recipes: [];
+    followers: number;
+    following: number;
+    createdAt?: string;
+    updatedAt?: string;
+}
+
+export const Creator: Schema = new Schema(
     {
         email: {
             type: String,
@@ -40,4 +56,4 @@ export const User: Schema = new Schema(
     { timestamps: true }
 );
 
-export const UserSchema = model('User', User);
+export const CreatorSchema = model('Creator', Creator);
