@@ -1,8 +1,10 @@
 import { Router } from "express";
-import { recipesRoutes } from "./recipes.routes";
+import { recipeRoutes } from "./recipe.routes";
 import { adminRoutes } from "./admin.routes";
+import { creatorRoutes } from "./creator.routes";
 
 export const appRoutes = Router();
 
-appRoutes.use('/recipes', recipesRoutes);
+appRoutes.use('/creators', creatorRoutes);
+appRoutes.use('/recipes', recipeRoutes);
 appRoutes.use('/admin', adminRoutes);

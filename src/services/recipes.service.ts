@@ -20,10 +20,18 @@ const searchRecipe = (q: string) => {
     );
 }
 
+const getTrendingRecipes = () => {
+    return RecipeSchema.find(
+        {
+            views: { $gte: 200 }
+        }
+    );
+}
 
 
 export const recipesService = {
     getAllRecipes,
     getRandomRecipes,
     searchRecipe,
+    getTrendingRecipes
 };

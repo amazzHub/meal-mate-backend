@@ -3,15 +3,24 @@ import { Schema, model } from 'mongoose';
 export type Ingredient = {
     name: string;
     grams: number;
+};
+
+export type IRecipeCreator = {
+    email: string;
+    firstName: string;
+    lastName: string;
+    avatar: string;
 }
+
 export type IRecipe = {
     _id?: string;
     name: string;
     ingredients: Ingredient;
     rating: number;
-    creatorEmail: string;
+    creator: IRecipeCreator;
     title: string;
     preparationTime: number;
+    views: number;
     createdAt?: string;
     updatedAt?: string;
 }
@@ -26,17 +35,20 @@ export const Recipe: Schema = new Schema(
             type: Array,
             required: true,
         },
-        ratings: {
+        rating: {
             type: Number
         },
-        creatorEmail: {
-            type: String,
+        creator: {
+            type: Object,
             required: true,
         },
         title: {
             type: String,
         },
         preparationTime: {
+            type: Number,
+        },
+        views: {
             type: Number,
         },
     },

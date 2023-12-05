@@ -15,6 +15,8 @@ const generateRecipes = async (count: number) => {
         const recipePromises = randomRecipesData.map(
             async (recipe: any) => {
                 const creator = creators[Math.floor(Math.random() * creators.length)];
+                const { email, firstName, lastName, avatar } = creator;
+
                 const recipeObj: IRecipe = {
                     name: recipe.title,
                     ingredients: recipe.extendedIngredients.map(
@@ -26,7 +28,13 @@ const generateRecipes = async (count: number) => {
                         )
                     ),
                     rating: faker.number.int({ min: 1, max: 5 }),
-                    creatorEmail: creator?.email,
+                    views: faker.number.int({ min: 50, max: 500 }),
+                    creator: {
+                        email,
+                        firstName,
+                        lastName,
+                        avatar
+                    },
                     title: recipe.title,
                     preparationTime: recipe.readyInMinutes
                 };

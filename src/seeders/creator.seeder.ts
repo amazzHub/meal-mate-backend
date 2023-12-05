@@ -12,7 +12,7 @@ const generateRandomCreators = (numCreators: number) => {
                 location: `${faker.location.city()}, ${faker.location.country()}`,
                 avatar: faker.image.avatar(),
                 about: faker.lorem.sentence(),
-                email: faker.internet.email(),
+                email: faker.internet.email().toLowerCase(),
                 isVerified: faker.datatype.boolean(),
                 recipes: [],
                 followers: faker.number.int({ min: 0, max: 1000 }),
