@@ -13,7 +13,6 @@ const getRandomRecipes = async (recipesCount: number) => {
     return response.data.recipes;
 };
 
-
 //Not working
 const searchRecipe = async (q: string) => {
     try {

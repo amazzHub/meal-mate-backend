@@ -39,4 +39,4 @@ export const generateCreators = async (creatorCount: number) => {
 
 export const creatorSeeder = {
     generateCreators,
-}
+};

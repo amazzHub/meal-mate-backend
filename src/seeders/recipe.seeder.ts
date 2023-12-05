@@ -3,7 +3,6 @@ import { faker } from '@faker-js/faker';
 import { creatorService } from '../services/creator.service';
 import { recipesService } from '../services/recipes.service';
 
-
 const generateRecipes = async (count: number) => {
     try {
         await RecipeSchema.deleteMany({});
@@ -52,4 +51,4 @@ const generateRecipes = async (count: number) => {
 
 export const recipeSeeder = {
     generateRecipes,
-}
+};

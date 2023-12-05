@@ -28,7 +28,6 @@ const getTrendingRecipes = () => {
     );
 }
 
-
 export const recipesService = {
     getAllRecipes,
     getRandomRecipes,

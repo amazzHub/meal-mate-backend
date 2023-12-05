@@ -22,8 +22,6 @@ const getCreatorProfile = (email: string): Promise<ICreator | null> => {
     return CreatorSchema.findOne({ email }).lean();
 };
 
-
-
 export const creatorService = {
     getCreators,
     getPopularCreators,

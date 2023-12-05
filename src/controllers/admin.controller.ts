@@ -23,7 +23,6 @@ export const generateRecipes = async (req: Request, res: Response) => {
     }
 }
 
-
 export const adminController = {
     generateCreators,
     generateRecipes
