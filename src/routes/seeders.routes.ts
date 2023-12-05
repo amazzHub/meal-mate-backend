@@ -3,5 +3,5 @@ import { adminController } from "../controllers/admin.controller";
 
 export const seedersRoutes = Router();
 
-seedersRoutes.get('/users', adminController.generateUsers);
+seedersRoutes.get('/creators', adminController.generateCreators);
 seedersRoutes.get('/recipes', adminController.generateRecipes);

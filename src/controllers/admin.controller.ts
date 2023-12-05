@@ -1,21 +1,23 @@
 import { Request, Response } from "express";
 import { recipeSeeder } from "../seeders/recipe.seeder";
-import { userSeeder } from "../seeders/user.seeder";
+import { creatorSeeder } from "../seeders/creator.seeder";
 import { HttpStatusCode } from "axios";
 
-export const generateUsers = async (req: Request, res: Response) => {
+export const generateCreators = async (req: Request, res: Response) => {
+    const creatorCount = req.query.count;
     try {
-        await userSeeder.generateUsers(req.query.count as any);
-        res.status(HttpStatusCode.Created).send({ message: 'User(s) generated successfully!' });
+        await creatorSeeder.generateCreators(creatorCount as any);
+        res.status(HttpStatusCode.Created).send({ message: `${creatorCount} Creator(s) generated successfully!` });
     } catch (error) {
-        res.status(HttpStatusCode.InternalServerError).send({ message: 'Failed to generate users!' });
+        res.status(HttpStatusCode.InternalServerError).send({ message: 'Failed to generate creators!' });
     }
 };
 
 export const generateRecipes = async (req: Request, res: Response) => {
+    const recipesCount = req.query.count;
     try {
-        await recipeSeeder.generateRecipes(req.query.count as any);
-        res.status(HttpStatusCode.Created).send({ message: `${req.query.count} Recipe(s) generated successfully!` });
+        await recipeSeeder.generateRecipes(recipesCount as any);
+        res.status(HttpStatusCode.Created).send({ message: `${recipesCount} Recipe(s) generated successfully!` });
     } catch (error) {
         res.status(HttpStatusCode.InternalServerError).send({ message: 'Failed to generate recipes!' });
     }
@@ -23,6 +25,6 @@ export const generateRecipes = async (req: Request, res: Response) => {
 
 
 export const adminController = {
-    generateUsers,
+    generateCreators,
     generateRecipes
 };

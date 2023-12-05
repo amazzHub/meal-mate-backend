@@ -1,6 +1,6 @@
-import { CreatorSchema } from "../database/schemas/user.schema";
+import { CreatorSchema } from "../database/schemas/creator.schema";
 
-const getUsers = async (count: number) => {
+const getCreators = async (count: number) => {
     try {
         return await CreatorSchema.find({}).limit(count);
     } catch (error) {
@@ -10,6 +10,6 @@ const getUsers = async (count: number) => {
 };
 
 
-export const userService = {
-    getUsers
+export const creatorService = {
+    getCreators
 }

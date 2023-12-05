@@ -1,6 +1,6 @@
 import { IRecipe, RecipeSchema } from '../database/schemas/recipe.schema';
 import { faker } from '@faker-js/faker';
-import { userService } from '../services/user.service';
+import { creatorService } from '../services/creator.service';
 import { recipesService } from '../services/recipes.service';
 
 
@@ -10,11 +10,11 @@ const generateRecipes = async (count: number) => {
         console.log("Existing recipes cleared");
 
         const randomRecipesData = await recipesService.getRandomRecipes(count);
-        const users = await userService.getUsers(count)
+        const creators = await creatorService.getCreators(count)
 
         const recipePromises = randomRecipesData.map(
             async (recipe: any) => {
-                const user = users[Math.floor(Math.random() * users.length)];
+                const creator = creators[Math.floor(Math.random() * creators.length)];
                 const recipeObj: IRecipe = {
                     name: recipe.title,
                     ingredients: recipe.extendedIngredients.map(
@@ -26,7 +26,7 @@ const generateRecipes = async (count: number) => {
                         )
                     ),
                     rating: faker.number.int({ min: 1, max: 5 }),
-                    creatorEmail: user?.email,
+                    creatorEmail: creator?.email,
                     title: recipe.title,
                     preparationTime: recipe.readyInMinutes
                 };
