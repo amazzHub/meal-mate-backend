@@ -11,6 +11,6 @@ app.use('/', appRoutes);
 app.listen(
     port,
     (): void => {
-        console.log(`Server running on http://localhost:${port}`);
+        console.log(`Server running on http://localhost:${port}`.toUpperCase());
     }
 );
