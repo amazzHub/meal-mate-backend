@@ -7,9 +7,9 @@ export const generateCreators = async (req: Request, res: Response) => {
     const creatorCount = req.query.count;
     try {
         await creatorSeeder.generateCreators(creatorCount as any);
-        res.status(HttpStatusCode.Created).send({ message: `${creatorCount} Creator(s) generated successfully!` });
+        res.status(HttpStatusCode.Created).json({ message: `${creatorCount} Creator(s) generated successfully!` });
     } catch (error) {
-        res.status(HttpStatusCode.InternalServerError).send({ message: 'Failed to generate creators!' });
+        res.status(HttpStatusCode.InternalServerError).json({ message: 'Failed to generate creators!' });
     }
 };
 
@@ -17,9 +17,9 @@ export const generateRecipes = async (req: Request, res: Response) => {
     const recipesCount = req.query.count;
     try {
         await recipeSeeder.generateRecipes(recipesCount as any);
-        res.status(HttpStatusCode.Created).send({ message: `${recipesCount} Recipe(s) generated successfully!` });
+        res.status(HttpStatusCode.Created).json({ message: `${recipesCount} Recipe(s) generated successfully!` });
     } catch (error) {
-        res.status(HttpStatusCode.InternalServerError).send({ message: 'Failed to generate recipes!' });
+        res.status(HttpStatusCode.InternalServerError).json({ message: 'Failed to generate recipes!' });
     }
 }
 
