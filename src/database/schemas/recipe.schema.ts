@@ -55,4 +55,4 @@ export const Recipe: Schema = new Schema(
     { timestamps: true }
 );
 
-export const RecipeSchema = model('recipe', Recipe);
+export const RecipeSchema = model('Recipe', Recipe);
