@@ -32,7 +32,7 @@ export const generateNotifications = async (req: Request, res: Response) => {
     } catch (error) {
         res.status(HttpStatusCode.InternalServerError).json({ message: 'Failed to generate notifications!' });
     }
-}
+};
 
 export const adminController = {
     generateCreators,

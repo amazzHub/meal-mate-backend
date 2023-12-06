@@ -6,6 +6,7 @@ export enum ENotificationType {
 }
 
 export type INotification = {
+    _id?: Types.ObjectId;
     creatorId?: Types.ObjectId;
     title: string;
     body: string;
