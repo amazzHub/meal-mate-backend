@@ -1,17 +1,17 @@
 import { CreatorSchema, ICreator } from "../database/schemas/creator.schema";
 
-const getCreators = async (count: number) => {
+const getCreators = (count: number): Promise<ICreator[]> | [] => {
     try {
-        return await CreatorSchema.find({}).limit(count);
+        return CreatorSchema.find({}).limit(count).lean();
     } catch (error) {
         console.error('Error fetching users:', error);
         return [];
     }
 };
 
-const getPopularCreators = async () => {
+const getPopularCreators = (): Promise<ICreator[]> | [] => {
     try {
-        return await CreatorSchema.find({ followers: { $gte: 300 } }).limit(8);
+        return CreatorSchema.find({ followers: { $gte: 300 } }).limit(8).lean();
     } catch (error) {
         console.error('Error fetching users:', error);
         return [];

@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose';
+import { Schema, Types, model } from 'mongoose';
 
 export enum ENotificationType {
     NEW_RECIPE = 1,
@@ -6,7 +6,7 @@ export enum ENotificationType {
 }
 
 export type INotification = {
-    creatorId?: string;
+    creatorId?: Types.ObjectId;
     title: string;
     body: string;
     type: ENotificationType;
@@ -25,7 +25,7 @@ export const Notification: Schema = new Schema(
             type: String,
         },
         type: {
-            type: String,
+            type: Number,
         }
     },
     { timestamps: true }
