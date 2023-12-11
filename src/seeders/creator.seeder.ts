@@ -1,8 +1,8 @@
 import { faker } from "@faker-js/faker";
-import { CreatorSchema } from "../database/schemas/creator.schema";
+import { CreatorSchema, ICreator } from "../database/schemas/creator.schema";
 
 const generateRandomCreators = (numCreators: number) => {
-    const creators = [];
+    const creators: ICreator[] = [];
 
     for (let i = 0; i < numCreators; i++) {
         creators.push(
@@ -14,9 +14,9 @@ const generateRandomCreators = (numCreators: number) => {
                 about: faker.lorem.sentence(),
                 email: faker.internet.email().toLowerCase(),
                 isVerified: faker.datatype.boolean(),
-                recipes: [],
-                followers: faker.number.int({ min: 0, max: 1000 }),
-                following: faker.number.int({ min: 0, max: 1000 }),
+                recipesCount: faker.number.int({ min: 10, max: 50 }),
+                followersCount: faker.number.int({ min: 10, max: 1000 }),
+                followingCount: faker.number.int({ min: 10, max: 1000 }),
             }
         );
     }

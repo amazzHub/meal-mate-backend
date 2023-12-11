@@ -1,7 +1,17 @@
-import { IRecipe, RecipeSchema } from '../database/schemas/recipe.schema';
+import { IRecipe, RecipeSchema, ingredientIconUris, recipeCoverUris } from '../database/schemas/recipe.schema';
 import { faker } from '@faker-js/faker';
 import { creatorService } from '../services/creator.service';
 import { recipesService } from '../services/recipes.service';
+
+const capitalizeFirstLetter = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
+
+const toUrlSlug = (str: string) => str
+    .toLowerCase()
+    .replace(/\s+/g, '_')
+    .replace(/[^\w-]+/g, '')
+    .replace(/--+/g, '_')
+    .replace(/^-+/, '')
+    .replace(/-+$/, '');
 
 const generateRecipes = async (count: number) => {
     try {
@@ -18,14 +28,17 @@ const generateRecipes = async (count: number) => {
 
                 const recipeObj: IRecipe = {
                     name: recipe.title,
+                    title: recipe.title,
                     ingredients: recipe.extendedIngredients.map(
                         (ingredient: any) => (
                             {
-                                name: ingredient.name,
-                                grams: ingredient.measures.metric.amount
+                                name: capitalizeFirstLetter(ingredient.name),
+                                grams: faker.number.int({ min: 50, max: 500 }),
+                                iconUri: ingredientIconUris[Math.floor(Math.random() * ingredientIconUris.length)]
                             }
                         )
                     ),
+                    coverImageUri: recipeCoverUris[Math.floor(Math.random() * recipeCoverUris.length)],
                     rating: faker.number.int({ min: 1, max: 5 }),
                     views: faker.number.int({ min: 50, max: 500 }),
                     creator: {
@@ -34,8 +47,8 @@ const generateRecipes = async (count: number) => {
                         lastName,
                         avatar
                     },
-                    title: recipe.title,
-                    preparationTime: recipe.readyInMinutes
+                    preparationTime: recipe.readyInMinutes,
+                    uri: `app.Recipe.co/${toUrlSlug(recipe.title)}`
                 };
                 return recipeObj;
             }
