@@ -9,9 +9,9 @@ export type ICreator = {
     avatar: string;
     about: string;
     isVerified: boolean;
-    recipes: [];
-    followers: number;
-    following: number;
+    recipesCount: number;
+    followersCount: number;
+    followingCount: number;
     createdAt?: string;
     updatedAt?: string;
 }
@@ -45,11 +45,13 @@ export const Creator: Schema = new Schema(
             type: Boolean,
             default: false,
         },
-        recipes: Array,
-        followers: {
+        recipesCount: {
             type: Number,
         },
-        following: {
+        followersCount: {
+            type: Number,
+        },
+        followingCount: {
             type: Number,
         },
     },
