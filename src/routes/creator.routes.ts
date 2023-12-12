@@ -6,3 +6,4 @@ export const creatorRoutes = Router();
 creatorRoutes.get('/', creatorController.fetchAllCreators);
 creatorRoutes.get('/profile', creatorController.fetchCreatorProfile);
 creatorRoutes.get('/popular', creatorController.fetchPopularCreators);
+creatorRoutes.get('/random', creatorController.fetchRandomCreatorProfile);

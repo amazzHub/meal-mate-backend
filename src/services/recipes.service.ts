@@ -25,7 +25,7 @@ const getTrendingRecipes = () => {
         {
             views: { $gte: 200 }
         }
-    );
+    ).limit(10);
 }
 
 export const recipesService = {

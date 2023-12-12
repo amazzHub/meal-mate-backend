@@ -1,4 +1,5 @@
 import mongoose, { Schema, model } from 'mongoose';
+import { IRecipe } from './recipe.schema';
 
 export type ICreator = {
     _id?: mongoose.Types.ObjectId;
@@ -9,7 +10,7 @@ export type ICreator = {
     avatar: string;
     about: string;
     isVerified: boolean;
-    recipesCount: number;
+    recipes: IRecipe[];
     followersCount: number;
     followingCount: number;
     createdAt?: string;
@@ -45,8 +46,8 @@ export const Creator: Schema = new Schema(
             type: Boolean,
             default: false,
         },
-        recipesCount: {
-            type: Number,
+        recipes: {
+            type: Array,
         },
         followersCount: {
             type: Number,
