@@ -1,5 +1,6 @@
 import { faker } from "@faker-js/faker";
 import { CreatorSchema, ICreator } from "../database/schemas/creator.schema";
+import { RecipeSchema } from "../database/schemas/recipe.schema";
 
 const generateRandomCreators = (numCreators: number) => {
     const creators: ICreator[] = [];
@@ -14,7 +15,7 @@ const generateRandomCreators = (numCreators: number) => {
                 about: faker.lorem.sentence(),
                 email: faker.internet.email().toLowerCase(),
                 isVerified: faker.datatype.boolean(),
-                recipesCount: faker.number.int({ min: 10, max: 50 }),
+                recipes: [],
                 followersCount: faker.number.int({ min: 10, max: 1000 }),
                 followingCount: faker.number.int({ min: 10, max: 1000 }),
             }
@@ -23,7 +24,7 @@ const generateRandomCreators = (numCreators: number) => {
     return creators;
 };
 
-export const generateCreators = async (creatorCount: number) => {
+const generateCreators = async (creatorCount: number) => {
     try {
         await CreatorSchema.deleteMany({});
         console.log("Existing creators cleared");
@@ -37,6 +38,24 @@ export const generateCreators = async (creatorCount: number) => {
     }
 };
 
+const generateCreatorRecipes = async () => {
+    try {
+        await CreatorSchema.updateMany({}, { $set: { recipes: [] } });
+        console.log("Existing creators recipes are cleared");
+        const totalCreators = await CreatorSchema.find({}).lean();
+        console.log('fetched ', totalCreators.length);
+
+        for (const creator of totalCreators) {
+            const creatorRecipes = await RecipeSchema.find({ 'creator.email': creator.email });
+            await CreatorSchema.updateOne({ _id: creator._id }, { $set: { recipes: creatorRecipes } })
+        }
+        console.log("Creator data seeded successfully");
+    } catch (error) {
+        throw error;
+    }
+};
+
 export const creatorSeeder = {
     generateCreators,
+    generateCreatorRecipes
 };

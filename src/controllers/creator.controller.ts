@@ -29,8 +29,18 @@ const fetchCreatorProfile = async (req: Request, res: Response) => {
     }
 };
 
+const fetchRandomCreatorProfile = async (req: Request, res: Response) => {
+    try {
+        const response = await creatorService.getRandomCreator();
+        return res.status(HttpStatusCode.Ok).json(response);
+    } catch (error) {
+        return res.status(HttpStatusCode.InternalServerError).json({ message: 'Something went wrong! Please try again later' });
+    }
+};
+
 export const creatorController = {
     fetchAllCreators,
     fetchPopularCreators,
-    fetchCreatorProfile
+    fetchCreatorProfile,
+    fetchRandomCreatorProfile
 };

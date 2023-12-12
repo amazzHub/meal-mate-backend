@@ -4,7 +4,7 @@ import { creatorSeeder } from "../seeders/creator.seeder";
 import { HttpStatusCode } from "axios";
 import { notificationSeeder } from "../seeders/notification.seeder";
 
-export const generateCreators = async (req: Request, res: Response) => {
+const generateCreators = async (req: Request, res: Response) => {
     const count = req.query.count;
     try {
         await creatorSeeder.generateCreators(count as any);
@@ -14,7 +14,7 @@ export const generateCreators = async (req: Request, res: Response) => {
     }
 };
 
-export const generateRecipes = async (req: Request, res: Response) => {
+const generateRecipes = async (req: Request, res: Response) => {
     const count = req.query.count;
     try {
         await recipeSeeder.generateRecipes(count as any);
@@ -24,7 +24,7 @@ export const generateRecipes = async (req: Request, res: Response) => {
     }
 };
 
-export const generateNotifications = async (req: Request, res: Response) => {
+const generateNotifications = async (req: Request, res: Response) => {
     const count = req.query.count;
     try {
         await notificationSeeder.generateNotifications(count as any);
@@ -34,8 +34,18 @@ export const generateNotifications = async (req: Request, res: Response) => {
     }
 };
 
+const generateCreatorRecipes = async (_req: Request, res: Response) => {
+    try {
+        await creatorSeeder.generateCreatorRecipes();
+        res.status(HttpStatusCode.Created).json({ message: 'Creator Recipes has been generated successfully!' });
+    } catch (error) {
+        res.status(HttpStatusCode.InternalServerError).json({ message: 'Failed to generate notifications!' });
+    }
+};
+
 export const adminController = {
     generateCreators,
     generateRecipes,
-    generateNotifications
+    generateNotifications,
+    generateCreatorRecipes
 };
