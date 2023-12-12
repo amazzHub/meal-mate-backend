@@ -3,6 +3,7 @@ import { recipeSeeder } from "../seeders/recipe.seeder";
 import { creatorSeeder } from "../seeders/creator.seeder";
 import { HttpStatusCode } from "axios";
 import { notificationSeeder } from "../seeders/notification.seeder";
+import { adminService } from "../services/admin.service";
 
 const generateCreators = async (req: Request, res: Response) => {
     const count = req.query.count;
@@ -43,9 +44,19 @@ const generateCreatorRecipes = async (_req: Request, res: Response) => {
     }
 };
 
+const generateApiKey = async (_req: Request, res: Response) => {
+    try {
+        const apiKey = await adminService.generateApiKey();
+        res.status(HttpStatusCode.Created).json({ apiKey });
+    } catch (error) {
+        res.status(HttpStatusCode.InternalServerError).json({ message: 'Failed to generate notifications!' });
+    }
+};
+
 export const adminController = {
+    generateCreatorRecipes,
+    generateNotifications,
     generateCreators,
     generateRecipes,
-    generateNotifications,
-    generateCreatorRecipes
+    generateApiKey,
 };
